@@ -1,0 +1,168 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>own-warehouse-parent</artifactId>
+        <groupId>code.warehouse</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>code.warehouse.boss</groupId>
+    <artifactId>own-warehouse-boss</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>own-warehouse-boss</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <!-- swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+        <!--
+            devtools可以实现页面热部署（即页面修改后会立即生效，这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现），
+            实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。
+            即devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存时机），注意：因为其采用的虚拟机机制，该项重启是很快的
+         -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true
+            </optional><!-- optional=true,依赖不会传递，该项目依赖devtools；之后依赖myboot项目的项目如果想要使用devtools，需要重新引入 -->
+            <scope>true</scope>
+        </dependency>
+
+
+        <!--     <dependency>
+                 <groupId>org.springframework.boot</groupId>
+                 <artifactId>spring-boot-starter-thymeleaf</artifactId>
+             </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+            <version>1.5.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.axet</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>code.warehouse.common</groupId>
+            <artifactId>own-warehouse-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+
+        <!-- 代码生成器 -->
+        <dependency>
+            <groupId>code.warehouse.generator</groupId>
+            <artifactId>own-warehouse-generator</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 定时任务模块 -->
+        <dependency>
+            <groupId>code.warehouse</groupId>
+            <artifactId>own-warehouse-schedule</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+
+            <!-- 用于将应用打成可直接运行的jar（该jar就是用于生产环境中的jar） 值得注意的是，如果没有引用spring-boot-starter-parent做parent，
+2                 且采用了上述的第二种方式，这里也要做出相应的改动-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 指定该Main Class为全局的唯一入口-->
+                    <mainClass>code.warehouse.Application</mainClass>
+                    <layout>ZIP</layout>
+                    <!--fork :  如果没有该项配置，devtools不会起作用，即应用不会restart-->
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
+            <!--
+                  <plugin>
+                      <artifactId>maven-assembly-plugin</artifactId>
+                      <configuration>
+                          <descriptor>src/main/assembly/assembly.xml</descriptor>
+                      </configuration>
+                      <executions>
+                          <execution>
+                              <id>make-assembly</id>
+                              <phase>package</phase>
+                              <goals>
+                                  <goal>single</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                  </plugin>-->
+
+        </plugins>
+    </build>
+</project>
