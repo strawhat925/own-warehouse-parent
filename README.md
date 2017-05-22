@@ -81,10 +81,10 @@ own-warehouse-parent
 - 通过git下载源码
 - 创建数据库own_house，数据库编码为UTF-8
 - 执行doc/own_house.sql文件，初始化数据【按需导入表结构及数据】
-- 修改mysql不区分大小写（quartz）
-  1、docker官方mysql镜像进入容器修改vi /etc/mysql/mysql.conf.d/mysqld.cnf，添加[lower_case_table_names=1]
-  2、linux下mysql配置/etc/mysql/my.cnf，添加[lower_case_table_names=1]
+- 修改mysql不区分大小写（quartz）</br>
+  1、docker官方mysql镜像进入容器修改vi /etc/mysql/mysql.conf.d/mysqld.cnf，添加[lower_case_table_names=1]</br>
+  2、linux下mysql配置/etc/mysql/my.cnf，添加[lower_case_table_names=1]</br>
 - 修改own-warehouse-boss下的application.properties文件，更新MySQL账号和密码
-- IDEA直接运行Application main即可
-  运行时添加program arguments [--server.port=8080 --spring.config.location=file:conf/db.properties]
+- IDEA直接运行Application main即可</br>
+  运行时添加program arguments [--server.port=8080 --spring.config.location=file:conf/db.properties]</br>
 - 项目访问路径：http://localhost:8080
