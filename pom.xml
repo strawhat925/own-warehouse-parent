@@ -33,9 +33,13 @@
         <commons-configuration-version>1.10</commons-configuration-version>
         <velocity-version>1.7</velocity-version>
         <velocity-tools-version>2.0</velocity-tools-version>
+
+        <docker.registry.name>zli</docker.registry.name>
+        <docker.plugin.version>0.4.13</docker.plugin.version>
     </properties>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,6 +52,28 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                        <!-- 打包去掉assembly id -->
+                        <appendAssemblyId>false</appendAssemblyId>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <dependencies>

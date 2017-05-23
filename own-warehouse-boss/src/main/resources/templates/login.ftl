@@ -119,7 +119,7 @@
                            dataType: "json",
                            success: function(result){
                                if(result.code == 200){//登录成功
-                                   parent.location.href ='/sys/index1';
+                                   parent.location.href ='/sys/index';
                                }else{
                                    vm.error = true;
                                    vm.errorMsg = result.data;
