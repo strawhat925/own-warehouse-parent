@@ -20,14 +20,23 @@ RUN mkdir -p /home/warehouse/web/boss
 WORKDIR /home/warehouse/web/boss
 
 
-COPY @project.build.finalName@.tar.gz /home/warehouse/web/boss/@project.build.finalName@.tar.gz
-RUN tar -zxvf @project.build.finalName@.tar.gz && rm *.tar.gz
+#COPY @project.build.finalName@.tar.gz /home/warehouse/web/boss/@project.build.finalName@.tar.gz
+#RUN tar -zxvf @project.build.finalName@.tar.gz && rm *.tar.gz
+
+ADD @project.build.finalName@.jar /home/warehouse/web/boss/@project.build.finalName@.jar
 
 #WORKDIR /home/warehouse/web/boss/bin
 #-v能挂载指定的主机目录，而volume不行
 #volme挂载在宿主机/var/lib/docker/volumes下
 #VOLUME mylog:/home/warehouse/web/boss/logs
 
-RUN chmod +x ./bin/catalina.sh
+CMD java -Xms256m -Xmx512m -jar @project.build.finalName@.jar --server.port=8080
+
+#RUN chmod +x ./bin/catalina.sh
 #ENTRYPOINT ["./bin/catalina.sh", "start"]
-CMD ["./bin/catalina.sh"]
+#CMD ["./bin/catalina.sh"]
+
+
+
+#docker启动
+# docker run -d -p 8080:8080 --name boss -v /home/warehouse/web/boss/logs:/home/warehouse/web/boss/logs zli/own-warehouse-boss
