@@ -24,8 +24,9 @@ COPY @project.build.finalName@.tar.gz /home/warehouse/web/boss/@project.build.fi
 RUN tar -zxvf @project.build.finalName@.tar.gz && rm *.tar.gz
 
 #WORKDIR /home/warehouse/web/boss/bin
-
-#VOLUME /var/log/boss:/home/warehouse/web/boss/logs
+#-v能挂载指定的主机目录，而volume不行
+#volme挂载在宿主机/var/lib/docker/volumes下
+#VOLUME mylog:/home/warehouse/web/boss/logs
 
 RUN chmod +x ./bin/catalina.sh
 #ENTRYPOINT ["./bin/catalina.sh", "start"]
