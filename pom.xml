@@ -14,6 +14,7 @@
         <module>own-warehouse-generator</module>
         <module>own-warehouse-api</module>
         <module>own-warehouse-schedule</module>
+        <module>own-warehouse-agent</module>
     </modules>
 
 
